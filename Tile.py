@@ -3,14 +3,8 @@ The Tile class will store information and properties of each of the tiles
 available in Carcassonne
 """
 import copy
-import cv2
 from Tile_dict import TILE_DESC_DICT, HAS_NOT_FARM, FARM_OPENINGS_DICT, FARM_CITY_INDEX_DICT, HAS_CITY, CITY_OPENINGS_DICT, IS_DOUBLE, HAS_ROAD, ROAD_OPENINGS_DICT, HAS_MONASTERY, NO_ROTATIONS, ONE_ROTATION, TILE_PROPERTIES_DICT, MEEPLE_LOC_DICT
             
-
-def showImage(frame):
-    cv2.imshow("Image", frame)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
 ROTATION_DICT = {
         0:[0,1,2,3],
@@ -25,13 +19,6 @@ SIDE_CHANGE_DICT = {
         180:2,
         270:3
         }
-
-ROTATE_DICT = {
-        90:cv2.ROTATE_90_CLOCKWISE,
-        180:cv2.ROTATE_180,
-        270:cv2.ROTATE_90_COUNTERCLOCKWISE
-        }
-
 
 class Tile:
     def __init__(self, TileIndex, RunInit = "True"):
@@ -158,14 +145,7 @@ class Tile:
             
     
     # representation of tile
-    def __repr__(self):
-        ShowImage = False
-        if ShowImage:
-            image = cv2.imread(self.image)
-            if ((self.Rotation % 360) > 0):
-                image = cv2.rotate(image, ROTATE_DICT[self.Rotation])
-            showImage(image)
-                    
+    def __repr__(self):     
         String = "Tile Index:" + str(self.TileIndex) + ", Description: " + str(self.tile_desc) + "\n"
         String += "Properties: " + str(self.Properties) + "\n"
         String += "Rotation: " + str(self.Rotation) + "\n"
